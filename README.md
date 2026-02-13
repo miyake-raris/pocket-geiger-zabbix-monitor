@@ -1,6 +1,6 @@
-# Pocket Geiger Type-6 Zabbix Monitor
+# Pocket Geiger Type-6 Zabbix Monitor (draft)
 
-Pocket Geiger Type-6 を Raspberry Pi に接続し、Zabbix で放射線量をモニタリングするシステムです。
+Pocket Geiger Type-6 を Raspberry Pi に接続し、Zabbix で放射線量をモニタリングするシステムです。が、書きかけです。
 
 ## 🌟 特徴
 
