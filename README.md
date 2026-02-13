@@ -19,8 +19,6 @@ Pocket Geiger Type-6 を Raspberry Pi に接続し、Zabbix で放射線量を�
 
 ## 🛠️ システム構成
 
-## 🛠️ システム構成
-
 ### クライアント側 (Raspberry Pi)
 - **Pocket Geiger Type-6**: USB接続で放射線を検出
 - **pocketgeiger_service.py**: シリアルデータを読み取り `/var/lib/pocketgeiger/data.json` に出力
