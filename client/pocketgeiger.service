@@ -1,0 +1,13 @@
+[Unit]
+Description=Pocket Geiger Monitor Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/pocketgeiger_service.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

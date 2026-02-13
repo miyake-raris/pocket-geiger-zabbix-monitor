@@ -1,0 +1,2 @@
+# PocketGeiger Type-6 USB-Serial 固定
+SUBSYSTEM=="tty", ATTRS{idVendor}=="04d8", ATTRS{idProduct}=="f46f", SYMLINK+="ttyPG"

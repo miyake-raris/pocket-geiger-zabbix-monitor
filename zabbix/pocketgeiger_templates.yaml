@@ -1,0 +1,220 @@
+zabbix_export:
+  version: '7.4'
+  template_groups:
+    - uuid: a436d111e8b14ad7ad3de8342c3407a4
+      name: Templates/Devices
+  templates:
+    - uuid: 5a24b307ae0f4449a83f7f5c26976d62
+      template: 'Pocket Geiger Type6'
+      name: 'Pocket Geiger Type6'
+      groups:
+        - name: Templates/Devices
+      items:
+        - uuid: cc9ce2d88aca4c5a94c7fe4a6bcc5a53
+          name: 'Counts Random (1sec avg)'
+          key: 'pocketgeiger.noise[noise_1s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+        - uuid: 3250c830ac7444338719ac17270cec0f
+          name: 'Counts Random (3sec avg)'
+          key: 'pocketgeiger.noise[noise_3s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+        - uuid: bc3599c70ca544a58d6e3529ddac7038
+          name: 'Counts Random (10sec avg)'
+          key: 'pocketgeiger.noise[noise_10s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+        - uuid: b48af52f2f1148c5b63f39cc271a6589
+          name: 'Counts Random (30sec avg)'
+          key: 'pocketgeiger.noise[noise_30s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+        - uuid: 9008952f09f34e00b75bf7d2c057ed85
+          name: 'Sample Count'
+          key: pocketgeiger.samples
+          delay: 1s
+          description: 現在のサンプル数（最大300）
+        - uuid: 7621d617818046a8ad3a7ec052b15854
+          name: 'Data Duration'
+          key: 'pocketgeiger.signal[duration_sec]'
+          delay: 1s
+          value_type: FLOAT
+          units: sec
+          description: 実際のデータカバー期間（秒）
+        - uuid: 2e76f934de614df18fce2ed4d819e45d
+          name: 'Counts Single (1sec avg)'
+          key: 'pocketgeiger.signal[signal_1s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+        - uuid: 12ce7970b5b84d81bb34853451356804
+          name: 'Counts Single (3sec avg)'
+          key: 'pocketgeiger.signal[signal_3s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+        - uuid: 62947b5897a84d24a2bd5b941be846ff
+          name: 'Counts Single (10sec avg)'
+          key: 'pocketgeiger.signal[signal_10s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+        - uuid: dba3d565868b4f8d95fec0fc7598fb8c
+          name: 'Counts Single (30sec avg)'
+          key: 'pocketgeiger.signal[signal_30s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+        - uuid: c49e401fb293459c9a6e4f82fdd2bca1
+          name: 'Data Timestamp'
+          key: pocketgeiger.timestamp
+          delay: 1s
+          units: unixtime
+          description: データの最終更新時刻
+        - uuid: d4fc21b260b34ba9aec2fb3045e08e97
+          name: 'Counts True (1sec avg)'
+          type: CALCULATED
+          key: 'pocketgeiger.true[true_1s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+          params: 'last(//pocketgeiger.signal[signal_1s]) - last(//pocketgeiger.noise[noise_1s])'
+        - uuid: c20aeff1a05e42ec9d0fbc24151a557e
+          name: 'Counts True (3sec avg)'
+          type: CALCULATED
+          key: 'pocketgeiger.true[true_3s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+          params: 'last(//pocketgeiger.signal[signal_3s]) - last(//pocketgeiger.noise[noise_3s])'
+        - uuid: 6f21a90cd7904ea59c33721d8e534947
+          name: 'Counts True (10sec avg)'
+          type: CALCULATED
+          key: 'pocketgeiger.true[true_10s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+          params: 'last(//pocketgeiger.signal[signal_10s]) - last(//pocketgeiger.noise[noise_10s])'
+        - uuid: f9c131d88bc64ea8b71131b1ceb1bd90
+          name: 'Counts True (30sec avg)'
+          type: CALCULATED
+          key: 'pocketgeiger.true[true_30s]'
+          delay: 1s
+          value_type: FLOAT
+          units: CPM
+          params: 'last(//pocketgeiger.signal[signal_30s]) - last(//pocketgeiger.noise[noise_30s])'
+        - uuid: 43522639184f4764a6a86148e4cc04e0
+          name: 'Service Uptime'
+          key: pocketgeiger.uptime
+          delay: 1s
+          value_type: FLOAT
+          units: sec
+          description: サービス起動からの経過時間
+  graphs:
+    - uuid: 8f6733bdf26e42e6a18a4917efb01066
+      name: 'Counts (1sec avg)'
+      yaxismax: '0'
+      graph_items:
+        - color: 1A7C11
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.noise[noise_1s]'
+        - sortorder: '1'
+          color: '274482'
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.signal[signal_1s]'
+        - sortorder: '2'
+          color: F63100
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.true[true_1s]'
+    - uuid: 52ad69b794794d6892a176ca48a0452c
+      name: 'Counts (3sec avg)'
+      yaxismax: '0'
+      graph_items:
+        - color: 1A7C11
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.noise[noise_3s]'
+        - sortorder: '1'
+          color: '274482'
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.signal[signal_1s]'
+        - sortorder: '2'
+          color: F63100
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.true[true_3s]'
+    - uuid: d04091b115724811b663e22ea8377f06
+      name: 'Counts (10sec avg)'
+      yaxismax: '0'
+      graph_items:
+        - color: 1A7C11
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.noise[noise_10s]'
+        - sortorder: '1'
+          color: '274482'
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.signal[signal_10s]'
+        - sortorder: '2'
+          color: F63100
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.true[true_10s]'
+    - uuid: c9f8fee9712942f0b4947bb8038cee66
+      name: 'Counts (30sec avg)'
+      yaxismax: '0'
+      graph_items:
+        - color: 1A7C11
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.noise[noise_30s]'
+        - sortorder: '1'
+          color: '274482'
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.signal[signal_30s]'
+        - sortorder: '2'
+          color: F63100
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: 'pocketgeiger.true[true_30s]'
+    - uuid: 257bc8ab394a44eda197c92879247e5d
+      name: 'Sample Count'
+      yaxismax: '0'
+      graph_items:
+        - color: 1A7C11
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: pocketgeiger.samples
+    - uuid: deda0bce64a2459b95b5099aaffea16b
+      name: 'Service Uptime'
+      yaxismax: '0'
+      graph_items:
+        - color: 1A7C11
+          calc_fnc: ALL
+          item:
+            host: 'Pocket Geiger Type6'
+            key: pocketgeiger.uptime
