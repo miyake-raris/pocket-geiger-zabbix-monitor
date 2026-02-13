@@ -61,14 +61,14 @@ Pocket Geiger → (USB) → Raspberry Pi → (Tailscale VPN) → VPS → Zabbix 
 
 #### クイックスタート
 
-\`\`\`bash
+```bash
 # リポジトリをクローン
 git clone https://github.com/あなたのユーザー名/pocket-geiger-zabbix-monitor.git
 cd pocket-geiger-zabbix-monitor
 
 # インストールスクリプトを実行
 sudo bash scripts/install-client.sh
-\`\`\`
+```
 
 ### 3. Zabbix Template のインポート
 
@@ -87,18 +87,18 @@ sudo bash scripts/install-client.sh
 
 ### データが取得できない
 
-\`\`\`bash
+```bash
 sudo systemctl status pocketgeiger.service
 sudo journalctl -u pocketgeiger.service -f
 ls -l /dev/ttyPG
-\`\`\`
+```
 
 ### Zabbix で値が 0 になる
 
-\`\`\`bash
+```bash
 zabbix_agent2 -t pocketgeiger.signal[signal_1s]
 ls -l /var/lib/pocketgeiger/data.json
-\`\`\`
+```
 
 ## 📄 ライセンス
 
