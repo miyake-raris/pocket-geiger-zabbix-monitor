@@ -19,16 +19,20 @@ Pocket Geiger Type-6 を Raspberry Pi に接続し、Zabbix で放射線量を�
 
 ## 🛠️ システム構成
 
-[Pocket Geiger] --USB--> [Raspberry Pi]
-└─ pocketgeiger_service.py
-└─ Zabbix Agent 2
-└─ Tailscale
-|
-[VPN Network]
-|
-[VPS Server]
-└─ Zabbix Server
-└─ Tailscale
+### クライアント側 (Raspberry Pi)
+- **Pocket Geiger Type-6**: USB接続で放射線を検出
+- **pocketgeiger_service.py**: シリアルデータを読み取り `/var/lib/pocketgeiger/data.json` に出力
+- **Zabbix Agent 2**: JSON ファイルを読み取り、VPS に送信
+- **Tailscale**: プライベート VPN で VPS と接続
+
+### サーバー側 (VPS)
+- **Zabbix Server**: Raspberry Pi からデータを受信・保存
+- **Nginx**: Zabbix Web UI を提供
+- **PostgreSQL**: データベース
+- **Tailscale**: プライベート VPN でクライアントと接続
+
+### 通信フロー
+Pocket Geiger → (USB) → Raspberry Pi → (Tailscale VPN) → VPS → Zabbix Web UI
 
 ## 📋 必要なもの
 ### ハードウェア
